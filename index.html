@@ -1,163 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kelvin's Website</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kelvin's World</title>
   <style>
-    /* General Styling for All Pages */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
     }
 
     body {
-      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      background: linear-gradient(-45deg, #1d2b64, #f8cdda, #1d2b64, #f8cdda);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      transition: background 0.3s, color 0.3s;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      transition: background 0.5s ease;
-    }
-
-    /* Home Page Animation */
-    .home {
-      background: linear-gradient(135deg, #1d3557, #457b9d, #a8dadc);
-      background-size: 200% 200%;
-      animation: gradientBGHome 10s ease infinite;
-    }
-
-    /* About Page Animation */
-    .about {
-      background: linear-gradient(135deg, #ff9a8b, #f7c1bb, #ff758c);
-      background-size: 200% 200%;
-      animation: gradientBGAbout 10s ease infinite;
-    }
-
-    /* Contact Page Animation */
-    .contact {
-      background: linear-gradient(135deg, #2e3d49, #8c6e63, #d1b7b1);
-      background-size: 200% 200%;
-      animation: gradientBGContact 10s ease infinite;
-    }
-
-    /* Animation Effects */
-    @keyframes gradientBGHome {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    @keyframes gradientBGAbout {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    @keyframes gradientBGContact {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* Styling for Header, Main Section, and Footer */
-    header {
-      background: rgba(0,0,0,0.3);
       padding: 20px;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .navbar button {
+      padding: 10px 20px;
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .navbar button:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    #content {
       text-align: center;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      left: 0;
+      max-width: 800px;
+      margin: auto;
     }
 
-    header h1 {
-      font-size: 2rem;
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 20px;
     }
 
-    nav {
-      margin-top: 10px;
-    }
-
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      margin: 0 15px;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-
-    nav a:hover {
-      color: #f1faee;
-      text-decoration: underline;
-    }
-
-    .main-section {
-      flex: 1;
-      padding: 120px 20px;
+    .card {
+      background: rgba(255,255,255,0.1);
+      padding: 20px;
+      border-radius: 12px;
+      flex: 1 1 200px;
       text-align: center;
+      backdrop-filter: blur(8px);
     }
 
-    .main-section h2 {
-      font-size: 2rem;
+    .profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 3px solid white;
+      object-fit: cover;
       margin-bottom: 20px;
     }
 
-    footer {
-      background: rgba(0,0,0,0.2);
-      padding: 10px;
-      text-align: center;
+    .toggle-btn {
       position: fixed;
-      width: 100%;
-      bottom: 0;
+      top: 10px;
+      right: 10px;
+      padding: 10px 15px;
+      background: rgba(0, 0, 0, 0.3);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+    }
+
+    body.light {
+      background: #f1f1f1;
+      color: #111;
+    }
+
+    body.light .navbar button {
+      background: #ddd;
+      color: #111;
+    }
+
+    body.light .card {
+      background: #fff;
+      color: #000;
+    }
+
+    body.light .toggle-btn {
+      background: #333;
+      color: #fff;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: underline;
     }
   </style>
 </head>
 <body class="home">
-  <header>
-    <h1>Welcome to Kelvin's Website</h1>
-    <nav>
-      <a href="#" onclick="changePage('home')">Home</a>
-      <a href="#" onclick="changePage('about')">About</a>
-      <a href="#" onclick="changePage('contact')">Contact</a>
-    </nav>
-  </header>
 
-  <div class="main-section" id="main-section">
-    <h2>Welcome to my Home Page!</h2>
-    <p>This is the home page where you can learn more about me and my interests.</p>
+  <button class="toggle-btn" onclick="toggleMode()">Switch Mode</button>
+
+  <div class="navbar">
+    <button onclick="changePage('home')">Home</button>
+    <button onclick="changePage('about')">About</button>
+    <button onclick="changePage('contact')">Contact</button>
+    <button onclick="changePage('portfolio')">Portfolio</button>
   </div>
 
-  <footer>
-    <p>&copy; 2025 Kelvin. All rights reserved.</p>
-  </footer>
+  <div id="content"></div>
 
   <script>
     function changePage(page) {
-      const mainSection = document.getElementById('main-section');
-      const body = document.body;
+      const content = document.getElementById('content');
 
       if (page === 'home') {
-        body.className = 'home';
-        mainSection.innerHTML = `
-          <h2>Welcome to my Home Page!</h2>
-          <p>This is the home page where you can learn more about me and my interests.</p>
+        content.innerHTML = `
+          <img src="https://i.postimg.cc/gJS6Wpv2/IMG-20240207-073212-882.jpg" alt="Kelvin" class="profile-pic" />
+          <h1>Welcome to Kelvin's World</h1>
+          <p>Hi, I'm Kelvin — a creative mind in tech. I build websites, boost social media accounts, and love gaming. Scroll through to know more about me!</p>
         `;
       } else if (page === 'about') {
-        body.className = 'about';
-        mainSection.innerHTML = `
-          <h2>Who is Kelvin?</h2>
-          <p>Kelvin is passionate about technology, gaming, and learning new things. This is his personal space to share his thoughts and experiences. I'm a computer science student and an aspiring software developer.</p>
+        content.innerHTML = `
+          <h1>About Kelvin</h1>
+          <p>I'm a student of computer science with a passion for AI, software development, and ethical hacking.</p>
+          <p>I enjoy helping people grow online by boosting their Instagram, TikTok, and other social platforms — affordably and fast!</p>
         `;
       } else if (page === 'contact') {
-        body.className = 'contact';
-        mainSection.innerHTML = `
-          <h2>Contact Kelvin</h2>
-          <p>If you'd like to get in touch with me, feel free to reach out through the contact form below or through my social media.</p>
+        content.innerHTML = `
+          <h1>Contact Me</h1>
+          <p>Email: <a href="mailto:kellykelvin829@gmail.com">kellykelvin829@gmail.com</a></p>
+          <p>Phone: <a href="tel:+234816966809">0816966809</a></p>
+          <p>Instagram: @kelvinboosts</p>
+          <p>Telegram: @kelvinboostz</p>
+        `;
+      } else if (page === 'portfolio') {
+        content.innerHTML = `
+          <h1>My Portfolio</h1>
+          <div class="gallery">
+            <div class="card">Built my first animated website</div>
+            <div class="card">Boosted over 50+ accounts on TikTok</div>
+            <div class="card">Editing mobile game content for TikTok</div>
+          </div>
         `;
       }
     }
+
+    function toggleMode() {
+      document.body.classList.toggle('light');
+    }
+
+    // Load home on startup
+    changePage('home');
   </script>
 </body>
 </html>
