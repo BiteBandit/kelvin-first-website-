@@ -2,179 +2,166 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Kelvin's World</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
     body {
-      font-family: 'Segoe UI', sans-serif;
-      color: white;
-      background: linear-gradient(-45deg, #1d2b64, #f8cdda, #1d2b64, #f8cdda);
+      background: linear-gradient(-45deg, #1d3557, #457b9d, #a8dadc, #f1faee);
       background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-      transition: background 0.3s, color 0.3s;
-      min-height: 100vh;
-      padding: 20px;
+      animation: gradient 15s ease infinite;
+      color: #333;
+      transition: 0.4s;
+    }
+    section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+    nav {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      backdrop-filter: blur(10px);
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    h1, h2 {
+      margin-bottom: 20px;
+    }
+    img {
+      width: 150px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+    }
+    .btn {
+      padding: 10px 20px;
+      background: #1d3557;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .btn:hover {
+      background: #457b9d;
     }
 
-    @keyframes gradientBG {
+    /* DARK MODE */
+    .dark-mode {
+      background: #121212;
+      color: #eee;
+    }
+    .dark-mode nav {
+      background: #1e1e1e;
+    }
+
+    /* SCROLL TO TOP BUTTON */
+    #topBtn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      background: #333;
+      color: white;
+      display: none;
+      cursor: pointer;
+    }
+
+    /* LOADER */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    @keyframes gradient {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-
-    .navbar {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-
-    .navbar button {
-      padding: 10px 20px;
-      background: rgba(255,255,255,0.1);
-      border: none;
-      color: white;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .navbar button:hover {
-      background: rgba(255,255,255,0.3);
-    }
-
-    #content {
-      text-align: center;
-      max-width: 800px;
-      margin: auto;
-    }
-
-    .gallery {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-      margin-top: 20px;
-    }
-
-    .card {
-      background: rgba(255,255,255,0.1);
-      padding: 20px;
-      border-radius: 12px;
-      flex: 1 1 200px;
-      text-align: center;
-      backdrop-filter: blur(8px);
-    }
-
-    .profile-pic {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      border: 3px solid white;
-      object-fit: cover;
-      margin-bottom: 20px;
-    }
-
-    .toggle-btn {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      padding: 10px 15px;
-      background: rgba(0, 0, 0, 0.3);
-      border: none;
-      border-radius: 8px;
-      color: white;
-      cursor: pointer;
-    }
-
-    body.light {
-      background: #f1f1f1;
-      color: #111;
-    }
-
-    body.light .navbar button {
-      background: #ddd;
-      color: #111;
-    }
-
-    body.light .card {
-      background: #fff;
-      color: #000;
-    }
-
-    body.light .toggle-btn {
-      background: #333;
-      color: #fff;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: underline;
-    }
   </style>
 </head>
-<body class="home">
+<body onload="startType()">
 
-  <button class="toggle-btn" onclick="toggleMode()">Switch Mode</button>
+  <!-- LOADING SCREEN -->
+  <div id="loader">Loading Kelvin's World...</div>
 
-  <div class="navbar">
-    <button onclick="changePage('home')">Home</button>
-    <button onclick="changePage('about')">About</button>
-    <button onclick="changePage('contact')">Contact</button>
-    <button onclick="changePage('portfolio')">Portfolio</button>
-  </div>
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="#home">Home</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="gallery.html">Gallery</a>
+  </nav>
 
-  <div id="content"></div>
+  <!-- THEME SWITCH -->
+  <button class="btn" style="position: fixed; top: 80px; right: 20px;" onclick="toggleTheme()">Toggle Mode</button>
 
+  <!-- SECTIONS -->
+  <section id="home">
+    <img src="https://i.postimg.cc/gJS6Wpv2/IMG-20240207-073212-882.jpg" alt="Kelvin's Picture"/>
+    <h1 id="type"></h1>
+    <p>I'm Kelvin — a social media booster and tech lover. Welcome to my personal space!</p>
+  </section>
+
+  <!-- VISITOR COUNTER -->
+  <section>
+    <h3>Visitor Counter</h3>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=1234567&style=0006&nbdigits=5&type=ip&initCount=0" alt="visitor counter"/>
+  </section>
+
+  <!-- SCROLL TO TOP BUTTON -->
+  <button onclick="scrollToTop()" id="topBtn">↑</button>
+
+  <!-- SCRIPTS -->
   <script>
-    function changePage(page) {
-      const content = document.getElementById('content');
+    // Loader
+    window.onload = () => {
+      document.getElementById("loader").style.display = "none";
+    };
 
-      if (page === 'home') {
-        content.innerHTML = `
-          <img src="https://i.postimg.cc/gJS6Wpv2/IMG-20240207-073212-882.jpg" alt="Kelvin" class="profile-pic" />
-          <h1>Welcome to Kelvin's World</h1>
-          <p>Hi, I'm Kelvin — a creative mind in tech. I build websites, boost social media accounts, and love gaming. Scroll through to know more about me!</p>
-        `;
-      } else if (page === 'about') {
-        content.innerHTML = `
-          <h1>About Kelvin</h1>
-          <p>I'm a student of computer science with a passion for AI, software development, and ethical hacking.</p>
-          <p>I enjoy helping people grow online by boosting their Instagram, TikTok, and other social platforms — affordably and fast!</p>
-        `;
-      } else if (page === 'contact') {
-        content.innerHTML = `
-          <h1>Contact Me</h1>
-          <p>Email: <a href="mailto:kellykelvin829@gmail.com">kellykelvin829@gmail.com</a></p>
-          <p>Phone: <a href="tel:+234816966809">0816966809</a></p>
-          <p>Instagram: @kelvinboosts</p>
-          <p>Telegram: @kelvinboostz</p>
-        `;
-      } else if (page === 'portfolio') {
-        content.innerHTML = `
-          <h1>My Portfolio</h1>
-          <div class="gallery">
-            <div class="card">Built my first animated website</div>
-            <div class="card">Boosted over 50+ accounts on TikTok</div>
-            <div class="card">Editing mobile game content for TikTok</div>
-          </div>
-        `;
+    // Dark/Light Mode Toggle
+    function toggleTheme() {
+      document.body.classList.toggle("dark-mode");
+    }
+
+    // Scroll To Top
+    window.onscroll = function() {
+      document.getElementById("topBtn").style.display = (document.documentElement.scrollTop > 100) ? "block" : "none";
+    };
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Typing Effect
+    const text = "Welcome to Kelvin's World!";
+    let i = 0;
+    function startType() {
+      if (i < text.length) {
+        document.getElementById("type").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(startType, 100);
       }
     }
-
-    function toggleMode() {
-      document.body.classList.toggle('light');
-    }
-
-    // Load home on startup
-    changePage('home');
   </script>
 </body>
 </html>
